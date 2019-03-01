@@ -1,1 +1,32 @@
 <!--index.wxml-->
+<view class='fw-flex fw-fdc fw-c-c'>
+	<!--logo区域-->
+	<view class='fw-flex fw-c-c' id='logoArea'>
+		<text class='fw-c-primary'>西柚数据通</text>
+	</view>
+	<!--输入框组-->
+	<view class='field-group'>
+		<van-cell-group>
+			<van-field
+			 label="账号"
+			 left-icon="contact"
+			 border="{{ true }}"
+			 placeholder='请输入账号'
+			 bind:input='accountInput'
+			/>
+			<van-field
+			 label="密码"
+			 type='password'
+			 left-icon="lock"
+			 border="{{ true }}"
+			 placeholder='请输入密码'
+			 bind:input='passwordInput'
+			/>
+		</van-cell-group>
+	</view>
+	<!--按钮组-->
+	<view class='fw-flex fw-fdc fw-c-c' class='btn-group'>
+		<i-button bind:click="btnLogin" type="primary" shape="circle" size="small" >登录</i-button>
+	</view>
+</view>
+

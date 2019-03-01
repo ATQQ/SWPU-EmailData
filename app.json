@@ -8,5 +8,9 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "西柚数据通",
     "navigationBarTextStyle":"black"
+  },
+  "usingComponents": {
+    "van-field": "source/plunge/vant/field/index",
+      "i-button": "source/plunge/iview//button/index"
   }
 }
