@@ -1,0 +1,97 @@
+<!--pages/mine/mine.wxml-->
+<view class='fw-bgc'>
+	<!--头像名称区域-->
+	<view id='mine-head' class=' fw-b-primary fw-flex'>
+		<!--头像-->
+		<view class='image'>
+			<view class='image-border'>
+				<image
+				 class=""
+				 src="{{userInfo.imgSrc}}"
+				 mode="scaleToFill"
+				 lazy-load="true"
+				/>
+			</view>
+		</view>
+		<!--title区域-->
+		<view class='mine-text fw-flex fw-fdc fw-c-l'>
+			<text class='name'>{{userInfo.name}}</text>
+			<text class='idNumber'>{{userInfo.idNumber}}</text>
+		</view>
+	</view>
+	<!--功能区域-->
+	<view id='mine-body'>
+		<view class='fun-area fw-flex fw-fdc'>
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>常用功能</text>
+				<text>></text>
+			</view>
+			<view class='fw-flex fw-c-c fun-item'>
+				<!--带logo图标列表-->
+				<view class='fw-flex fw-fdc super fw-c-c' wx:for="{{superitems}}">
+					<i-icon
+					 class='fw-text-c'
+					 type="{{item.icon}}"
+					 size="28"
+					 color="#80848f"
+					/>
+					<text class='fw-text-c'>{{item.name}}</text>
+				</view>
+			</view>
+		</view>
+		<view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>{{item.name}}</text>
+				<text>></text>
+			</view>
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>{{item.name}}</text>
+				<text>></text>
+			</view>
+		</view>
+        <view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>{{item.name}}</text>
+				<text>></text>
+			</view>
+		</view>
+        <view class='fun-area fw-flex fw-fdc'>
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>常见问题</text>
+				<text>></text>
+			</view>
+			<view class='fw-flex fw-c-sb fun-item'>
+				<text>问题反馈</text>
+				<text>></text>
+			</view>
+		</view>
+	</view>
+
+	<i-tab-bar current="{{ tabsBarcurrent }}" bindchange="tabsBarchange" fixed>
+		<i-tab-bar-item
+		 key="homepage"
+		 icon="homepage"
+		 current-icon="homepage_fill"
+		 title="首页"
+		/>
+		<i-tab-bar-item
+		 key="group"
+		 icon="group"
+		 current-icon="group_fill"
+		 title="Friends"
+		/>
+		<i-tab-bar-item
+		 key="remind"
+		 icon="remind"
+		 current-icon="remind_fill"
+		 title="Notice"
+		/>
+		<i-tab-bar-item
+		 key="mine"
+		 icon="mine"
+		 current-icon="mine_fill"
+		 title="我的"
+		/>
+	</i-tab-bar>
+</view>
+

@@ -1,0 +1,52 @@
+#mine-head {
+  padding: 50px 10px 10px 10px;
+}
+#mine-head .image {
+  width: 16vw;
+  height: 16vw;
+  padding: 6px;
+}
+#mine-head .image .image-border {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #dddee1;
+  box-shadow: 0 0 3px #ddd;
+  overflow: hidden;
+}
+#mine-head .image .image-border image {
+  width: 100%;
+  height: 100%;
+}
+#mine-head .mine-text {
+  padding: 6px 0 6px 18px;
+  color: #fff;
+  height: 16vw;
+}
+#mine-head .mine-text .name {
+  font-size: 38rpx;
+}
+#mine-head .mine-text .idNumber {
+  font-size: 31rpx;
+}
+.fun-area {
+  margin: 8px 0;
+  background-color: #fff;
+}
+.fun-area .fun-item {
+  padding: 6px 4px;
+  border-bottom: 1px solid #e9eaec;
+}
+.fun-area .fun-item text {
+  font-size: 28rpx;
+}
+.fun-area .fun-item:last-child {
+  border-bottom: none;
+}
+.fun-area .fun-item .super {
+  width: 16vw;
+  margin: 4px 6px;
+}
+.fun-area .fun-item .super text {
+  font-size: 22rpx;
+}
