@@ -1,0 +1,9 @@
+<!--pages/demo/demo.wxml-->
+<view>
+  <button type="" size="" bindtap="chooseimg">choose</button>
+  <button bindtap='chooseFile'>chooseFile</button>
+  <block wx:for="{{imageurls}}">
+    <image bindtap='previewImage' data-src='{{item}}' src="{{item}}" />
+  </block>
+  <button type="primary" size="" bindtap="uploadimg">upload</button>
+</view>
