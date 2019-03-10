@@ -22,7 +22,9 @@ Page({
   btnLogin:function () {
     console.log(this.data.account);
     console.log(this.data.password);
-
+    wx.redirectTo({
+      url: '../mine/mine',
+    })
   },
 
   onLoad: function () {

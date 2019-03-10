@@ -47,6 +47,9 @@
 .fw-c-SubColor{
   color: #80848f;
 }
+.fw-c-error{
+  color:#ed3f14;
+}
 .fw-c-Disabled{
   color: #bbbec4;
 }

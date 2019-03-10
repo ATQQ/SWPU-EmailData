@@ -1,0 +1,10 @@
+<!--pages/problem/problem.wxml-->
+<!--手风琴折叠版-->
+<van-collapse value="{{ activeName }}" bind:change="onChange" accordion>
+  <van-collapse-item  wx:for="{{content}}" title="{{item.title}}" name="{{index}}">
+    {{item.text}}
+    <view class='fw-flex fw-fdc'>
+        
+    </view>
+  </van-collapse-item>
+</van-collapse>

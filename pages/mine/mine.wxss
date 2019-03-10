@@ -34,7 +34,7 @@
   background-color: #fff;
 }
 .fun-area .fun-item {
-  padding: 6px 4px;
+  padding: 6px 10px;
   border-bottom: 1px solid #e9eaec;
 }
 .fun-area .fun-item text {
@@ -49,4 +49,19 @@
 }
 .fun-area .fun-item .super text {
   font-size: 22rpx;
+}
+.modal {
+  padding: 10px;
+  width: 80vw;
+  border-radius: 1rem;
+}
+.modal .title {
+  text-align: center;
+  font-size: 35rpx;
+  margin-bottom: 10px;
+}
+.modal .content {
+  font-size: 38rpx;
+  text-align: center;
+  margin-bottom: 6px;
 }

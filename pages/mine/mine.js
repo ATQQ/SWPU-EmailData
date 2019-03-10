@@ -10,24 +10,26 @@ Page({
     userInfo:{
       imgSrc:'../../source/multimedia/image/testpic.png',
       name:'小邹',
-      idNumber:'201731061422'
+      idNumber:'201731061422',
     },
+    noticePWD:"由于XXX原因,暂时只能通过使用浏览器更改密码,如有不便,敬请谅解",
+    emailShow: false,
+    pwdShow:false,
+    PWDweb:'www.baidu.com',
+    Useremail: [
+      "2604395430@qq.com",
+      "dafafaf@qq.com"
+    ],
     superitems:[
       {
-        icon:'activity',
-        name:'功能1'
+        icon:'mail',
+        name:'查看邮箱',
+        key:'mail'
       },
       {
         icon: 'collection',
-        name: '功能2'
-      },
-      {
-        icon: 'flashlight',
-        name: '功能3'
-      },
-      {
-        icon: 'mail',
-        name: '功能4'
+        name: '密码服务',
+        key:'password'
       }
     ],
     funitems:[
@@ -36,7 +38,71 @@ Page({
       }
     ]
   },
-
+  // 复制邮箱
+  copy:function (res) {
+    wx.setClipboardData({
+      data: res.currentTarget.dataset.key,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
+  },
+  // 常用功能
+  superFun:function(res){
+    const key = res.currentTarget.dataset.key;
+    console.log(key);
+    switch(key){
+      case 'mail':
+        this.setData({
+          emailShow:true
+        })
+      break;
+      case 'password':
+        this.setData({
+          pwdShow: true
+        })
+      break;
+    }
+  },
+  // 关闭弹窗
+  emailClose:function(){
+    this.setData({
+      emailShow: false
+    })
+  },
+  pwdClose: function () {
+    this.setData({
+      pwdShow: false
+    })
+  },
+  // 页面跳转
+  funClick:function (res) {
+      const key=res.currentTarget.dataset.key;
+      console.log(key);
+      switch (key) {
+        case 'problem':
+          wx.navigateTo({
+            url: '../problem/problem',
+            success:function (res) {
+              wx.showToast({
+                title: '加载中',
+                icon: 'loading',
+                duration: 2500        //  2秒后自动关闭
+              })
+            }
+          })
+          break;
+      
+        default:
+          break;
+      }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

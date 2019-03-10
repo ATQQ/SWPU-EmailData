@@ -1,6 +1,5 @@
 <!--pages/mine/mine.wxml-->
 <view class='fw-bgc'>
-	<!--头像名称区域-->
 	<view id='mine-head' class=' fw-b-primary fw-flex'>
 		<!--头像-->
 		<view class='image'>
@@ -28,7 +27,12 @@
 			</view>
 			<view class='fw-flex fw-c-c fun-item'>
 				<!--带logo图标列表-->
-				<view class='fw-flex fw-fdc super fw-c-c' wx:for="{{superitems}}">
+				<view
+				 class='fw-flex fw-fdc super fw-c-c'
+				 wx:for="{{superitems}}"
+				 data-key="{{item.key}}"
+				 bindtap='superFun'
+				>
 					<i-icon
 					 class='fw-text-c'
 					 type="{{item.icon}}"
@@ -39,6 +43,7 @@
 				</view>
 			</view>
 		</view>
+		<!--
 		<view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
 			<view class='fw-flex fw-c-sb fun-item'>
 				<text>{{item.name}}</text>
@@ -49,14 +54,14 @@
 				<text>></text>
 			</view>
 		</view>
-        <view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
+		<view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
 			<view class='fw-flex fw-c-sb fun-item'>
 				<text>{{item.name}}</text>
 				<text>></text>
 			</view>
-		</view>
-        <view class='fun-area fw-flex fw-fdc'>
-			<view class='fw-flex fw-c-sb fun-item'>
+		</view>-->
+		<view class='fun-area fw-flex fw-fdc'>
+			<view class='fw-flex fw-c-sb fun-item' data-key='problem' bindtap="funClick">
 				<text>常见问题</text>
 				<text>></text>
 			</view>
@@ -67,6 +72,44 @@
 		</view>
 	</view>
 
+	<!-- 各种弹窗区域 -->
+	<view>
+		<!--邮箱弹窗-->
+		<van-popup show="{{ emailShow }}" overlay="{{ true }}" bind:click-overlay="emailClose">
+			<view class='fw-flex fw-fdc modal'>
+				<text class='title fw-c-primary'>校园邮箱</text>
+				<text class='content' wx:for="{{Useremail}}" data-key="{{item}}" bindtap="copy">{{item}}</text>
+				<van-tag
+				 class='fw-text-c'
+				 round='true'
+				 plain='true'
+				 type="primary"
+				 color='#2d8cf0'
+				 size='medium'
+				>点击对应的邮箱即可复制到剪贴板
+				</van-tag>
+			</view>
+		</van-popup>
+		<!--修改密码-->
+		<van-popup show="{{ pwdShow }}" overlay="{{ true }}" bind:click-overlay="pwdClose">
+			
+			<view class='fw-flex fw-fdc modal'>
+				<text class='title fw-c-error'>修改密码</text>
+				<text class='content' bindtap="copy" data-key='{{PWDweb}}'>{{PWDweb}}</text>
+				<van-tag
+				 class='fw-text-c'
+				 round='true'
+				 plain='true'
+				 type="primary"
+				 color='#ed3f14'
+				 size='medium'
+				>点击网址即可复制到剪贴板
+				</van-tag>
+			</view>
+		</van-popup>
+
+	</view>
+	<!-- 底部导航栏 -->
 	<i-tab-bar current="{{ tabsBarcurrent }}" bindchange="tabsBarchange" fixed>
 		<i-tab-bar-item
 		 key="homepage"
