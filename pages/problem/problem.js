@@ -6,14 +6,23 @@ Page({
    */
   data: {
     activeName: '2',
+    index:null,
     content:[
       {
         title:'标题1',
-        text:'内容xxxx'
+        text:'内容xxxx',
+        imgs:[
+          '../../source/multimedia/image/testpic.png',
+          '../../source/multimedia/image/testpic.png'
+        ]
       },
       {
         title: '标题1',
-        text: '内容xxxx'
+        text: '内容xxxx',
+        imgs: [
+          'http://pic2.sc.chinaz.com/files/pic/pic9/201902/hpic636.jpg',
+          'http://pic.sc.chinaz.com/files/pic/pic9/201903/hpic663.jpg'
+        ]
       },
       {
         title: '标题1',
@@ -26,7 +35,6 @@ Page({
     ]
   },
   onChange(event) {
-    console.log(event);
     this.setData({
       activeName: event.detail
     });

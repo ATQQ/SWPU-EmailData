@@ -1,1 +1,5 @@
 /* pages/problem/problem.wxss */
+.problemImg{
+    max-width:90vw;
+    margin:6px 0;
+}
