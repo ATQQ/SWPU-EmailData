@@ -46,7 +46,7 @@ Page({
       duration: 2000, //  2秒后自动关闭
       complete: function() {
         wx.navigateBack({
-
+          delta:1
         })
       }
     })

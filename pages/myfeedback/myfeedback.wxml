@@ -1,2 +1,61 @@
 <!--pages/myfeedback/myfeedback.wxml-->
-<text>pages/myfeedback/myfeedback.wxml</text>
+<view>
+    <scroll-view id='message-sv'>
+		<view class='fw-flex fw-c-c fw-warp'>
+			<block wx:for="{{messageData}}">
+				<view class='message-item' bindtap="messageClick" data-index='{{index}}'>
+					<view class='message-text'>
+						<text class='time'>{{item.time}}</text>
+						<text class='text-detail van-ellipsis'>{{item.problem.text}}</text>
+						<text class='text-detail van-ellipsis fw-c-Success'>{{item.reply.text}}</text>
+					</view>
+                    <view class='message-status fw-flex fw-c-c'>
+                        <text wx:if="{{item.status}}" class='fw-c-Success'>
+                        ● 已回复
+                        </text>
+                        <text wx:elif="{{!item.status}}" class='fw-c-primary'>
+                        ● 待回复
+                        </text>
+                    </view>
+				</view>
+			</block>
+		</view>
+	</scroll-view>
+
+    <van-popup
+  show="{{ showPopup }}"
+  position="right"
+  close-on-click-overlay
+  overlay
+  bind:click-overlay='closePopup'
+    >
+  <view id='Popup'>
+      <view class='fw-flex fw-fdc'>
+        <scroll-view scroll-y="true" class='fw-margin-top-xs'>
+            <view class='fw-flex fw-fdc fw-c-c'>
+                <text class='title fw-c-primary fw-text-c'>问题</text>
+                <text class='content fw-c-SubColor'>
+                {{popUpData.problem.text}}
+                </text>
+                <view class='fw-margin-top-xs fw-flex fw-c-c fw-warp'>
+                    <image mode='aspectFit' wx:for="{{popUpData.problem.images}}" src="{{item}}" />
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view scroll-y="true" class='fw-margin-top-xs'>
+            <view class='fw-flex fw-fdc fw-c-c'>
+                <text class='title fw-c-Success fw-text-c'>回复</text>                
+             <text class='content fw-c-SubColor'>
+                {{popUpData.reply.text}}
+                </text>
+                <view class='fw-margin-top-xs fw-flex fw-c-c fw-warp'>
+                    <image mode='aspectFit' wx:for="{{popUpData.reply.images}}" src="{{item}}" />
+                </view>
+            
+            </view>
+        </scroll-view>
+		<i-button bind:click="closePopup" type="default" shape="circle" size="default" >关闭</i-button>          
+      </view>
+  </view>
+</van-popup>
+</view>

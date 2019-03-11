@@ -1,1 +1,59 @@
-/* pages/myfeedback/myfeedback.wxss */
+#message-sv {
+  background-color: #e9eaec;
+  margin-bottom: 51px;
+  display: flex;
+  flex-wrap: wrap;
+}
+#message-sv .message-item {
+  width: 95vw;
+  background-color: #fff;
+  border-radius: .8rem;
+  margin: 5px 0;
+  display: flex;
+  justify-content: left;
+  border: 1px solid #dddee1;
+}
+.message-item .message-text {
+  padding: 6px;
+  width: 73vw;
+  display: flex;
+  flex-direction: column;
+}
+.message-item .message-text .time {
+  margin-right: 10px;
+  display: block;
+  color: #2d8cf0;
+  float: right;
+  font-size: 26rpx;
+  line-height: 48rpx;
+}
+.message-item .message-text .text-detail {
+  color: #495060;
+  padding: 0 4px;
+  font-size: 27rpx;
+}
+.message-item .message-status text {
+  font-size: 15px;
+}
+#Popup {
+  min-height: 100vh;
+  width: 100vw;
+}
+#Popup scroll-view {
+  max-height: 40vh;
+}
+.title {
+  font-size: 30rpx;
+}
+.content {
+  font-size: 35rpx;
+  padding: 0 10px;
+  text-indent: 30rpx;
+}
+image {
+  max-width: 80vw;
+  margin-bottom: 10px;
+}
+image:last-child {
+  margin-bottom: 0px;
+}

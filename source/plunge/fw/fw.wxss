@@ -41,6 +41,9 @@
 .fw-c-title{
   color: #1c2438;
 }
+.fw-c-Success{
+  color:#19be6b !important;
+}
 .fw-c-content{
   color: #495060;
 }

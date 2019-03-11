@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/myfeedback/myfeedback",
     "pages/feedback/feedback",
     "pages/mine/mine",
     "pages/problem/problem",
     "pages/demo/demo",
-    "pages/logs/logs",
-    "pages/myfeedback/myfeedback"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
