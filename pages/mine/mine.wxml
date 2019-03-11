@@ -65,8 +65,15 @@
 				<text>常见问题</text>
 				<text>></text>
 			</view>
-			<view class='fw-flex fw-c-sb fun-item'>
+			<view class='fw-flex fw-c-sb fun-item' data-key='feedback' bindtap="funClick">
 				<text>问题反馈</text>
+				<text>></text>
+			</view>
+		</view>
+
+		<view class='fun-area fw-flex fw-fdc'>
+			<view class='fw-flex fw-c-sb fun-item' data-key='myfeedback' bindtap="funClick">
+				<text>我的反馈</text>
 				<text>></text>
 			</view>
 		</view>

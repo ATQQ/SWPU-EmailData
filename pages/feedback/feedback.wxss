@@ -1,0 +1,16 @@
+textarea {
+  width: 90vw;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 4px #ddd;
+  letter-spacing: 2px;
+  color: #2b85e4;
+  line-height: 20px;
+  font-size: 16px;
+}
+image {
+  width: 90vw;
+  margin: 6px 0;
+}
+scroll-view {
+  max-height: 66vw;
+}

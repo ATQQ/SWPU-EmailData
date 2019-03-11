@@ -6,40 +6,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabsBarcurrent:'mine',
-    userInfo:{
-      imgSrc:'../../source/multimedia/image/testpic.png',
-      name:'小邹',
-      idNumber:'201731061422',
+    tabsBarcurrent: 'mine',
+    userInfo: {
+      imgSrc: '../../source/multimedia/image/testpic.png',
+      name: '小邹',
+      idNumber: '201731061422',
     },
-    noticePWD:"由于XXX原因,暂时只能通过使用浏览器更改密码,如有不便,敬请谅解",
+    noticePWD: "由于XXX原因,暂时只能通过使用浏览器更改密码,如有不便,敬请谅解",
     emailShow: false,
-    pwdShow:false,
-    PWDweb:'www.baidu.com',
+    pwdShow: false,
+    PWDweb: 'www.baidu.com',
     Useremail: [
       "2604395430@qq.com",
       "dafafaf@qq.com"
     ],
-    superitems:[
+    superitems: [
       {
-        icon:'mail',
-        name:'查看邮箱',
-        key:'mail'
+        icon: 'mail',
+        name: '查看邮箱',
+        key: 'mail'
       },
       {
         icon: 'collection',
         name: '密码服务',
-        key:'password'
+        key: 'password'
       }
     ],
-    funitems:[
+    funitems: [
       {
-        name:'功能'
+        name: '功能'
       }
     ]
   },
   // 复制邮箱
-  copy:function (res) {
+  copy: function (res) {
     wx.setClipboardData({
       data: res.currentTarget.dataset.key,
       success: function (res) {
@@ -54,24 +54,24 @@ Page({
     })
   },
   // 常用功能
-  superFun:function(res){
+  superFun: function (res) {
     const key = res.currentTarget.dataset.key;
     console.log(key);
-    switch(key){
+    switch (key) {
       case 'mail':
         this.setData({
-          emailShow:true
+          emailShow: true
         })
-      break;
+        break;
       case 'password':
         this.setData({
           pwdShow: true
         })
-      break;
+        break;
     }
   },
   // 关闭弹窗
-  emailClose:function(){
+  emailClose: function () {
     this.setData({
       emailShow: false
     })
@@ -82,26 +82,49 @@ Page({
     })
   },
   // 页面跳转
-  funClick:function (res) {
-      const key=res.currentTarget.dataset.key;
-      console.log(key);
-      switch (key) {
-        case 'problem':
-          wx.navigateTo({
-            url: '../problem/problem',
-            success:function (res) {
-              wx.showToast({
-                title: '加载中',
-                icon: 'loading',
-                duration: 2500        //  2秒后自动关闭
-              })
-            }
-          })
-          break;
-      
-        default:
-          break;
-      }
+  funClick: function (res) {
+    const key = res.currentTarget.dataset.key;
+    console.log(key);
+    switch (key) {
+      case 'problem':
+        wx.navigateTo({
+          url: '../problem/problem',
+          success: function (res) {
+            wx.showToast({
+              title: '加载中',
+              icon: 'loading',
+              duration: 2500        //  2秒后自动关闭
+            })
+          }
+        })
+        break;
+      case 'feedback':
+        wx.navigateTo({
+          url: '../feedback/feedback',
+          success: function (res) {
+            wx.showToast({
+              title: '加载中',
+              icon: 'loading',
+              duration: 2500        //  2秒后自动关闭
+            })
+          }
+        })
+        break;
+      case 'myfeedback':
+        wx.navigateTo({
+          url: '../myfeedback/myfeedback',
+          success: function (res) {
+            wx.showToast({
+              title: '加载中',
+              icon: 'loading',
+              duration: 2500        //  2秒后自动关闭
+            })
+          }
+        })
+        break;
+      default:
+        break;
+    }
   },
   /**
    * 生命周期函数--监听页面加载
