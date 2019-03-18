@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/feedback/feedback",
     "pages/index/index",
     "pages/myfeedback/myfeedback",
-    "pages/feedback/feedback",
     "pages/mine/mine",
     "pages/problem/problem",
     "pages/demo/demo",

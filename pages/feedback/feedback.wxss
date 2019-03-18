@@ -7,10 +7,9 @@ textarea {
   line-height: 20px;
   font-size: 16px;
 }
-image {
-  width: 90vw;
-  margin: 6px 0;
+swiper {
+  height: 60vw;
 }
-scroll-view {
-  max-height: 66vw;
+swiper swiper-item image {
+  height: 60vw;
 }

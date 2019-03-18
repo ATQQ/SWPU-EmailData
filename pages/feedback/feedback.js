@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    images: null,
-    text: ''
+    text: '',
+    images:[]
   },
   previewImage: function(e) {
     var current = e.target.dataset.src;
