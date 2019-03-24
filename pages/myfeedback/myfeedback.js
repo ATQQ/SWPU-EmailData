@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeName:"1",
+    activeName:1,
     showPopup:false,
     messageData:[
       {
