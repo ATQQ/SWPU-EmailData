@@ -35,6 +35,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:"http://localhost:8080/WebTest/"
+    baseUrl:"http://localhost:8080/SWPU_Mail/"
   }
 })

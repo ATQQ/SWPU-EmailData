@@ -1,49 +1,39 @@
 <!--pages/mine/mine.wxml-->
 <view class='fw-bgc'>
-	<view id='mine-head' class=' fw-b-primary fw-flex'>
-		<!--头像-->
-		<view class='image'>
-			<view class='image-border'>
-				<image
-				 class=""
-				 src="{{userInfo.imgSrc}}"
-				 mode="scaleToFill"
-				 lazy-load="true"
-				/>
-			</view>
-		</view>
-		<!--title区域-->
-		<view class='mine-text fw-flex fw-fdc fw-c-l'>
-			<text class='name'>{{userInfo.name}}</text>
-			<text class='idNumber'>{{userInfo.idNumber}}</text>
-		</view>
-	</view>
-	<!--功能区域-->
-	<view id='mine-body'>
-		<view class='fun-area fw-flex fw-fdc'>
-			<view class='fw-flex fw-c-sb fun-item'>
-				<text>常用功能</text>
-				<text>></text>
-			</view>
-			<view class='fw-flex fw-c-c fun-item'>
-				<!--带logo图标列表-->
-				<view
-				 class='fw-flex fw-fdc super fw-c-c'
-				 wx:for="{{superitems}}"
-				 data-key="{{item.key}}"
-				 bindtap='superFun'
-				>
-					<i-icon
-					 class='fw-text-c'
-					 type="{{item.icon}}"
-					 size="28"
-					 color="#80848f"
-					/>
-					<text class='fw-text-c'>{{item.name}}</text>
-				</view>
-			</view>
-		</view>
-		<!--
+  <view hidden='{{secondsure}}'>
+    <!-- 需要二次确认通告 -->
+    <van-notice-bar mode="closeable" text="点击邮箱,二次确定你的邮箱是否正确,不正确请提交反馈" />
+  </view>
+
+  <view id='mine-head' class=' fw-b-primary fw-flex'>
+    <!--头像-->
+    <view class='image'>
+      <view class='image-border'>
+        <image class="" src="{{userInfo.imgSrc}}" mode="scaleToFill" lazy-load="true" />
+      </view>
+    </view>
+    <!--title区域-->
+    <view class='mine-text fw-flex fw-fdc fw-c-l'>
+      <text class='name'>{{userInfo.name}}</text>
+      <text class='idNumber'>{{userInfo.idNumber}}</text>
+    </view>
+  </view>
+  <!--功能区域-->
+  <view id='mine-body'>
+    <view class='fun-area fw-flex fw-fdc'>
+      <view class='fw-flex fw-c-sb fun-item'>
+        <text>常用功能</text>
+        <text>></text>
+      </view>
+      <view class='fw-flex fw-c-c fun-item'>
+        <!--带logo图标列表-->
+        <view class='fw-flex fw-fdc super fw-c-c' wx:for="{{superitems}}" data-key="{{item.key}}" bindtap='superFun'>
+          <i-icon class='fw-text-c' type="{{item.icon}}" size="28" color="#80848f" />
+          <text class='fw-text-c'>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <!--
 		<view class='fun-area fw-flex fw-fdc' wx:for="{{funitems}}">
 			<view class='fw-flex fw-c-sb fun-item'>
 				<text>{{item.name}}</text>
@@ -60,88 +50,57 @@
 				<text>></text>
 			</view>
 		</view>-->
-		<view class='fun-area fw-flex fw-fdc'>
-			<view class='fw-flex fw-c-sb fun-item' data-key='problem' bindtap="funClick">
-				<text>常见问题</text>
-				<text>></text>
-			</view>
-			<view class='fw-flex fw-c-sb fun-item' data-key='feedback' bindtap="funClick">
-				<text>问题反馈</text>
-				<text>></text>
-			</view>
-		</view>
+    <view class='fun-area fw-flex fw-fdc'>
+      <view class='fw-flex fw-c-sb fun-item' data-key='problem' bindtap="funClick">
+        <text>常见问题</text>
+        <text>></text>
+      </view>
+      <view class='fw-flex fw-c-sb fun-item' data-key='feedback' bindtap="funClick">
+        <text>问题反馈</text>
+        <text>></text>
+      </view>
+    </view>
 
-		<view class='fun-area fw-flex fw-fdc'>
-			<view class='fw-flex fw-c-sb fun-item' data-key='myfeedback' bindtap="funClick">
-				<text>我的反馈</text>
-				<text>></text>
-			</view>
-		</view>
-	</view>
+    <view class='fun-area fw-flex fw-fdc'>
+      <view class='fw-flex fw-c-sb fun-item' data-key='myfeedback' bindtap="funClick">
+        <text>我的反馈</text>
+        <text>></text>
+      </view>
+    </view>
+  </view>
 
-	<!-- 各种弹窗区域 -->
-	<view>
-		<!--邮箱弹窗-->
-		<van-popup show="{{ emailShow }}" overlay="{{ true }}" bind:click-overlay="emailClose">
-			<view class='fw-flex fw-fdc modal'>
-				<text class='title fw-c-primary'>校园邮箱</text>
-				<text class='content' wx:for="{{Useremail}}" data-key="{{item}}" bindtap="copy">{{item}}</text>
-				<van-tag
-				 class='fw-text-c'
-				 round='true'
-				 plain='true'
-				 type="primary"
-				 color='#2d8cf0'
-				 size='medium'
-				>点击对应的邮箱即可复制到剪贴板
-				</van-tag>
-			</view>
-		</van-popup>
-		<!--修改密码-->
-		<van-popup show="{{ pwdShow }}" overlay="{{ true }}" bind:click-overlay="pwdClose">
-			
-			<view class='fw-flex fw-fdc modal'>
-				<text class='title fw-c-error'>修改密码</text>
-				<text class='content' bindtap="copy" data-key='{{PWDweb}}'>{{PWDweb}}</text>
-				<van-tag
-				 class='fw-text-c'
-				 round='true'
-				 plain='true'
-				 type="primary"
-				 color='#ed3f14'
-				 size='medium'
-				>点击网址即可复制到剪贴板
-				</van-tag>
-			</view>
-		</van-popup>
+  <!-- 各种弹窗区域 -->
+  <view>
+    <!--邮箱弹窗-->
+    <van-popup show="{{ emailShow }}" overlay="{{ true }}" bind:click-overlay="emailClose">
+      <view class='fw-flex fw-fdc modal'>
+        <text class='title fw-c-primary'>校园邮箱</text>
+        <text class='content' wx:for="{{Useremail}}" data-key="{{item}}" bindtap="copy">{{item}}</text>
+        <van-tag class='fw-text-c' round='true' plain='true' type="primary" color='#2d8cf0' size='medium'>点击对应的邮箱即可复制到剪贴板
+        </van-tag>
+        <!-- 二次确认 -->
+        <view hidden='{{secondsure}}'>
+          <i-button bind:click="sureMail" type="success" shape="circle" size="default">确定无误</i-button>
+        </view>
+      </view>
+    </van-popup>
+    <!--修改密码-->
+    <van-popup show="{{ pwdShow }}" overlay="{{ true }}" bind:click-overlay="pwdClose">
 
-	</view>
-	<!-- 底部导航栏 -->
-	<i-tab-bar current="{{ tabsBarcurrent }}" bindchange="tabsBarchange" fixed>
-		<i-tab-bar-item
-		 key="homepage"
-		 icon="homepage"
-		 current-icon="homepage_fill"
-		 title="首页"
-		/>
-		<i-tab-bar-item
-		 key="group"
-		 icon="group"
-		 current-icon="group_fill"
-		 title="Friends"
-		/>
-		<i-tab-bar-item
-		 key="remind"
-		 icon="remind"
-		 current-icon="remind_fill"
-		 title="Notice"
-		/>
-		<i-tab-bar-item
-		 key="mine"
-		 icon="mine"
-		 current-icon="mine_fill"
-		 title="我的"
-		/>
-	</i-tab-bar>
+      <view class='fw-flex fw-fdc modal'>
+        <text class='title fw-c-error'>修改密码</text>
+        <text class='content' bindtap="copy" data-key='{{PWDweb}}'>{{PWDweb}}</text>
+        <van-tag class='fw-text-c' round='true' plain='true' type="primary" color='#ed3f14' size='medium'>点击网址即可复制到剪贴板
+        </van-tag>
+      </view>
+    </van-popup>
+
+  </view>
+  <!-- 底部导航栏 -->
+  <i-tab-bar current="{{ tabsBarcurrent }}" bindchange="tabsBarchange" fixed>
+    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页" />
+    <i-tab-bar-item key="group" icon="group" current-icon="group_fill" title="Friends" />
+    <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" title="Notice" />
+    <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的" />
+  </i-tab-bar>
 </view>
-

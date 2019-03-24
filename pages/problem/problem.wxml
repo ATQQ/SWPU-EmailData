@@ -1,10 +1,12 @@
 <!--pages/problem/problem.wxml-->
 <!--手风琴折叠版-->
-<van-collapse value="{{ activeName }}" bind:change="onChange" accordion>
-  <van-collapse-item  wx:for="{{content}}" title="{{item.title}}" name="{{index}}">
-    {{item.text}}
-    <view class='fw-flex fw-fdc fw-margin-top-xs'>
-        <image class='problemImg' wx:for="{{content[index].imgs}}" src="{{item}}" mode='aspectFit'/>
-    </view>
-  </van-collapse-item>
-</van-collapse>
+<view>
+  <van-collapse value="{{ activeName }}" bind:change="onChange" accordion>
+    <van-collapse-item wx:for="{{content}}" title="{{item.title}}" name="{{index}}">
+      {{item.text}}
+      <view class='fw-flex fw-fdc fw-margin-top-xs'>
+        <image class='problemImg' wx:for="{{content[index].imgs}}" src="{{item}}" mode='aspectFit' />
+      </view>
+    </van-collapse-item>
+  </van-collapse>
+</view>

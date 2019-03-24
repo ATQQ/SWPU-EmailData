@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    secondsure:true,
     tabsBarcurrent: 'mine',
     userInfo: {
       imgSrc: '../../source/multimedia/image/testpic.png',

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    activeName:"1",
     showPopup:false,
     messageData:[
       {
@@ -45,6 +46,16 @@ Page({
       }
     ],
     popUpData:null
+  },
+  prewiewImg:function(res){
+    var src=res.dataset.currentTarget.src;
+    console.log(src);
+  },
+  onChange(event) {
+    console.log(event.detail);
+    this.setData({
+      activeName: event.detail
+    });
   },
   messageClick:function (res) {
     var index = res.currentTarget.dataset.index;
