@@ -1,5 +1,6 @@
 // pages/mine/mine.js
-const app = getApp()
+const app = getApp();
+const baseurl = app.globalData.baseUrl;
 Page({
 
   /**
@@ -127,11 +128,58 @@ Page({
         break;
     }
   },
+  //刷新数据
+  refreshData:function(name,email,username){
+    this.setData({
+      userInfo:{
+        idNumber:username,
+        name:name,
+        imgSrc: '../../source/multimedia/image/testpic.png'
+      },
+      Useremail:[
+        email
+      ]
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
 
+    var token=wx.getStorageSync('token');
+    if(token===null||token===''){
+      wx.showToast({
+        title: '登陆过期',
+        mask:true,
+        icon:'none'
+      })
+      //重定向到登录页面
+      wx.redirectTo({
+        url: '../index/index',
+      })
+    }else{
+      // 请求数据
+      var that=this;
+      
+      wx.request({
+        url: baseurl +'email/get',
+        method:"GET",
+        header: app.globalData.header,
+        success:function(res){
+          console.log(res);
+          res=res.data;
+          //刷新数据
+          that.refreshData(res.data.name, res.data.email,res.data.username);
+        },
+        fail:function(){
+          wx.showToast({
+            title: '网络错误',
+            icon:'none',
+            mask:true
+          })
+        }
+      })
+    }
   },
 
   /**
