@@ -2,7 +2,7 @@
 const app = getApp();
 const baseurl = app.globalData.baseUrl;
 Page({
-
+  //test push
   /**
    * 页面的初始数据
    */
