@@ -83,20 +83,15 @@ Page({
                 mask: true,
                 icon: 'success'
               })
-              console.log(res.data.status);
-              //重定向
-              // wx.redirectTo({
-              //   url: '../mine/mine',
-              // })
               //判断是否为首次登陆
 
               switch (res.data.status) {
                 case 0:
                   //跳转到修改密码
-                  //跳转到首页
                   wx.redirectTo({
-                    url: '../mine/mine',
+                    url: '../resetPwd/index',
                   })
+                  console.log("需要改密码");
                   break;
                 case 1:
                   //跳转到首页

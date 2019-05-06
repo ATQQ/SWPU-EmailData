@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/resetPwd/index",
     "pages/mine/mine",
     "pages/myfeedback/myfeedback",
     "pages/problem/problem",

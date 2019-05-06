@@ -67,6 +67,13 @@
         <text>></text>
       </view>
     </view>
+
+    <view class='fun-area fw-flex fw-fdc'>
+      <view class='fw-flex fw-c-sb fun-item' data-key='logout' bindtap="funClick">
+        <text>退出登录</text>
+        <text>></text>
+      </view>
+    </view>
   </view>
 
   <!-- 各种弹窗区域 -->

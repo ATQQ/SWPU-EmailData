@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    secondsure:true,
+    secondsure: true,
     tabsBarcurrent: 'mine',
     userInfo: {
       imgSrc: '../../source/multimedia/image/testpic.png',
@@ -124,19 +124,61 @@ Page({
           }
         })
         break;
+      case 'logout':
+        wx.showModal({
+          title: '提示',
+          content: '确定退出？',
+          success: function (res) {
+            if (res.confirm) {
+              wx.showToast({
+                title: '请稍等...',
+                icon: 'loading',
+                mask:true,
+                duration: 2000        //  2秒后自动关闭
+              })
+              // 确定删除
+              wx.request({
+                url: baseurl + "user/logout",
+                method: "GET",
+                header: app.globalData.header,
+                success: function (res) {
+                  res = res.data;
+                  if (res.status == 1) {
+                    // 重定向到登录页面
+                    wx.redirectTo({
+                      url: '../index/index',
+                      success: function (res) {
+                        wx.showToast({
+                          title: '退出成功',
+                          icon: 'loading',
+                          duration: 1000        //  2秒后自动关闭
+                        })
+                      }
+                    })
+                  }
+                }
+              })
+            } else if (res.cancel) {
+              console.log('取消删除')
+            }
+          }
+        })
+
+
+        break;
       default:
         break;
     }
   },
   //刷新数据
-  refreshData:function(name,email,username){
+  refreshData: function (name, email, username) {
     this.setData({
-      userInfo:{
-        idNumber:username,
-        name:name,
+      userInfo: {
+        idNumber: username,
+        name: name,
         imgSrc: '../../source/multimedia/image/testpic.png'
       },
-      Useremail:[
+      Useremail: [
         email
       ]
     })
@@ -146,36 +188,36 @@ Page({
    */
   onLoad: function (options) {
 
-    var token=wx.getStorageSync('token');
-    if(token===null||token===''){
+    var token = wx.getStorageSync('token');
+    if (token === null || token === '') {
       wx.showToast({
         title: '登陆过期',
-        mask:true,
-        icon:'none'
+        mask: true,
+        icon: 'none'
       })
       //重定向到登录页面
       wx.redirectTo({
         url: '../index/index',
       })
-    }else{
+    } else {
       // 请求数据
-      var that=this;
-      
+      var that = this;
+
       wx.request({
-        url: baseurl +'email/get',
-        method:"GET",
+        url: baseurl + 'email/get',
+        method: "GET",
         header: app.globalData.header,
-        success:function(res){
+        success: function (res) {
           console.log(res);
-          res=res.data;
+          res = res.data;
           //刷新数据
-          that.refreshData(res.data.name, res.data.email,res.data.username);
+          that.refreshData(res.data.name, res.data.email, res.data.username);
         },
-        fail:function(){
+        fail: function () {
           wx.showToast({
             title: '网络错误',
-            icon:'none',
-            mask:true
+            icon: 'none',
+            mask: true
           })
         }
       })

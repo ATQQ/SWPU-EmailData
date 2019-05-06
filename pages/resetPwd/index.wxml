@@ -1,0 +1,35 @@
+<!--index.wxml-->
+<view class='fw-flex fw-fdc fw-c-c'>
+	<!--logo区域-->
+	<view class='fw-flex fw-c-c' id='logoArea'>
+		<text class='fw-c-primary'>首次登录,请修改密码</text>
+	</view>
+	<!--输入框组-->
+	<view class='field-group'>
+		<van-cell-group>
+			<van-field
+			 label="密码"
+			 type='password'
+			 left-icon="lock"
+			 border="{{ true }}"
+			 placeholder='请输入新密码'
+			 bind:input='firstPassword'
+			/>
+			<van-field
+			 label="密码"
+			 type='password'
+			 left-icon="lock"
+			 border="{{ true }}"
+			 placeholder='请再次输入密码'
+			 bind:input='secondPassword'
+			 value="{{pwd2}}"
+			 error="{{errmsg}}"
+			/>
+		</van-cell-group>
+	</view>
+	<!--按钮组-->
+	<view class='fw-flex fw-fdc fw-c-c' class='btn-group'>
+		<i-button bind:click="btnSure" type="primary" shape="circle" size="small" >确认修改</i-button>
+	</view>
+</view>
+

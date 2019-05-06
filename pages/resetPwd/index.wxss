@@ -1,0 +1,17 @@
+/**index.wxss**/
+#logoArea{
+    padding: 5px;
+    margin: 80px 0 30px 0;
+}
+
+#logoArea text{
+    font-size: 55rpx;
+}
+
+.field-group{
+    padding: 2px 6px;
+}
+
+.btn-group{
+    margin-top:16px;
+}
