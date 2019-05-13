@@ -1,12 +1,14 @@
 // pages/feedback/feedback.js
+const app = getApp()
+const baseurl = app.globalData.baseUrl;
+var imgArray = new Array(); //存放保存过后的图片名数组
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     text: '',
-    images:[]
+    images: []
   },
   previewImage: function(e) {
     var current = e.target.dataset.src;
@@ -36,20 +38,110 @@ Page({
     })
   },
   sureSubmit: function(e) {
+    // 获取当前用户的附加信息
+    var userData = JSON.parse(wx.getStorageSync('userData')).data;
+    //上传的图片内容
     var imgs = this.data.images;
+    //输入的反馈内容
     var text = this.data.text;
-    console.log(imgs);
-    console.log(text);
-    wx.showToast({
-      title: '成功',
-      icon: 'success',
-      duration: 2000, //  2秒后自动关闭
-      complete: function() {
-        wx.navigateBack({
-          delta:1
-        })
-      }
-    })
+    // 开始上传图片
+    for (let i = 0; i < imgs.length; i++) {
+      wx.uploadFile({
+        url: baseurl + 'file/save',
+        filePath: imgs[i],
+        name: 'file',
+        success: function(res) {
+          let resData = JSON.parse(res.data);
+          imgArray.push(resData.image);
+          // 当所有图片上传完成后
+          //提交反馈信息
+          if (i + 1 == imgs.length) {
+            wx.request({
+              url: baseurl+'feedback/feedback',
+              method:"POST",
+              data:{
+                'username': userData.username,
+                'email': userData.email,
+                'problem': text,
+                'proimg': JSON.stringify(imgArray)
+              },
+              success:function(res){
+                if(res.data.status){
+                  imgArray = new Array(); //重置上传的图片数组
+                  wx.showToast({
+                    title: '成功',
+                    icon: 'success',
+                    duration: 1000, //  2秒后自动关闭
+                    complete: function () {
+                      setTimeout(function(){
+                        wx.navigateBack({
+                          delta: 1
+                        });
+                      },1000);
+                    }
+                  })
+                }else{
+                  wx.showToast({
+                    title: '反馈失败',
+                    duration: 1000 //  2秒后自动关闭
+                  })
+                }
+              },
+              fail:function(res){
+                wx.showToast({
+                  title: '网络异常',
+                  duration: 1000 //  2秒后自动关闭
+                })
+              }
+            })
+            return;
+          }
+        }
+      })
+    }
+
+    //
+    if (imgs.length == 0) {
+      wx.request({
+        url: baseurl + 'feedback/feedback',
+        method: "POST",
+        data: {
+          'username': userData.username,
+          'email': userData.email,
+          'problem': text,
+          'proimg': JSON.stringify(imgArray)
+        },
+        success: function (res) {
+          if (res.data.status) {
+            imgArray = new Array(); //重置上传的图片数组
+            wx.showToast({
+              title: '成功',
+              icon: 'success',
+              duration: 1000, //  1秒后自动关闭
+              complete: function () {
+                setTimeout(function () {
+                  wx.navigateBack({
+                    delta: 1
+                  });
+                }, 1000);
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '反馈失败',
+              duration: 1000
+            })
+          }
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '网络异常',
+            duration: 1000 //  2秒后自动关闭
+          })
+        }
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面加载

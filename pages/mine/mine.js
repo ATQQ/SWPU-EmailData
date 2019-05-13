@@ -208,6 +208,7 @@ Page({
         method: "GET",
         header: app.globalData.header,
         success: function (res) {
+          wx.setStorageSync('userData', JSON.stringify(res.data));
           console.log(res);
           res = res.data;
           //刷新数据

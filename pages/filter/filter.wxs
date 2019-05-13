@@ -1,0 +1,7 @@
+function imageUrl(value){
+  return 'http://localhost:8080/SWPU_Mail/' +"swpuEmailSource/feedbackPic/"+value;
+}
+
+module.exports={
+  imageUrl:imageUrl
+}

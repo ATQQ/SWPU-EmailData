@@ -1,4 +1,6 @@
 // pages/myfeedback/myfeedback.js
+const app = getApp()
+const baseurl = app.globalData.baseUrl;
 Page({
 
   /**
@@ -83,7 +85,68 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 获取当前用户的附加信息
+    var userData = JSON.parse(wx.getStorageSync('userData')).data;
+    var that=this;
+    wx.request({
+      url: baseurl+'feedback/feedback',
+      method:"GET",
+      data:{
+        "username": userData.username
+      },
+      success:function(res){
+        // console.log(res.data)
+        res=res.data;
+        if(res.status){
+          //临时存储格式化后的反馈信息数组
+          let tdatas=new Array();
+          for(let i=0;i<res.data.length;i++){
+            let temp=res.data[i];
+            // 如果未回复
+            if(temp.status==0){
+              tdatas.push({
+                "id": temp.id,
+                "time": (new Date(temp.date)).Format('yyyy-MM-dd hh:mm:ss'),
+                "problem": {
+                  "text": temp.problem,
+                  "images": JSON.parse(temp.proimg)
+                },
+                "status":false
+              })
+            }else{
+              tdatas.push({
+                "id": temp.id,
+                "time": (new Date(temp.date)).Format('yyyy-MM-dd hh:mm:ss'),
+                "problem": {
+                  "text": temp.problem,
+                  "images": JSON.parse(temp.proimg)
+                },
+                "reply":{
+                  "text":temp.reply,
+                  "images": JSON.parse(temp.repimg)
+                },
+                "status": true
+              })
+            }
+            
+          }
 
+          // 设置为获取到的数据
+          that.setData({
+            messageData: tdatas
+          })
+
+          // console.log(tdatas);
+        }else{
+          that.setData({
+            messageData:[]
+          })
+        }
+      },
+      fail:function(err){
+
+      }
+    })
   },
 
   /**
@@ -135,3 +198,27 @@ Page({
 
   }
 })
+
+// 对Date的扩展，将 Date 转化为指定格式的String 
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符， 
+// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) 
+// 例子： 
+// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
+// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
+Date.prototype.Format = function (fmt) { //author: meizz 
+  var o = {
+    "M+": this.getMonth() + 1,                 //月份 
+    "d+": this.getDate(),                    //日 
+    "h+": this.getHours(),                   //小时 
+    "m+": this.getMinutes(),                 //分 
+    "s+": this.getSeconds(),                 //秒 
+    "q+": Math.floor((this.getMonth() + 3)/3), //季度 
+    "S": this.getMilliseconds()             //毫秒 
+  };
+  if (/(y+)/.test(fmt))
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt))
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+  return fmt;
+}
