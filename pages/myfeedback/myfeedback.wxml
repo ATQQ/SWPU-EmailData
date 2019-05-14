@@ -55,7 +55,7 @@
                 <swiper autoplay='{{true}}' indicator-dots='{{true}}' duration='{{1000}}' interval='{{2000}}'>
                   <swiper-item wx:for="{{popUpData.reply.images}}">
                     <view class='fw-flex fw-c-c'>
-                      <image mode='aspectFit' src='{{item}}' bindtap='prewiewImg'></image>
+                      <image mode='aspectFit' src='{{filter.imageUrl(item)}}' bindtap='prewiewImg'></image>
                     </view>
                   </swiper-item>
                 </swiper>
