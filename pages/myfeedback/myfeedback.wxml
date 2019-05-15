@@ -40,7 +40,7 @@
                 <swiper autoplay='{{true}}' indicator-dots='{{true}}' duration='{{1000}}' interval='{{2000}}'>
                   <swiper-item wx:for="{{popUpData.problem.images}}">
                     <view class='fw-flex fw-c-c'>
-                      <image mode='aspectFit' src='{{filter.imageUrl(item)}}' bindtap='prewiewImg'></image>
+                      <image mode='aspectFit' src='{{filter.imageUrl(item)}}' bindtap='prewiewImg' data-src='{{filter.imageUrl(item)}}'></image>
                     </view>
                   </swiper-item>
                 </swiper>
@@ -55,7 +55,7 @@
                 <swiper autoplay='{{true}}' indicator-dots='{{true}}' duration='{{1000}}' interval='{{2000}}'>
                   <swiper-item wx:for="{{popUpData.reply.images}}">
                     <view class='fw-flex fw-c-c'>
-                      <image mode='aspectFit' src='{{filter.imageUrl(item)}}' bindtap='prewiewImg'></image>
+                      <image mode='aspectFit' src='{{filter.imageUrl(item)}}' bindtap='prewiewImg' data-src='{{filter.imageUrl(item)}}'></image>
                     </view>
                   </swiper-item>
                 </swiper>

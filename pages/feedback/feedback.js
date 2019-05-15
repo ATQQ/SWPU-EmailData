@@ -12,7 +12,7 @@ Page({
   },
   previewImage: function(e) {
     var current = e.target.dataset.src;
-    console.log(current)
+    // console.log(current)
     wx.previewImage({
       urls: this.data.images,
       current: current

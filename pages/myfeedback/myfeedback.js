@@ -47,11 +47,18 @@ Page({
         status: false
       }
     ],
-    popUpData:null
+    popUpData:null,
+    previewImg:new Array()
   },
-  prewiewImg:function(res){
-    var src=res.dataset.currentTarget.src;
-    console.log(src);
+  prewiewImg:function(e){
+    var current = e.target.dataset.src;
+    console.log(current)
+    wx.previewImage({
+      urls: this.data.previewImg,
+      current: current
+    })
+    // var src = res.currentTarget.dataset.src;
+    // console.log(src);
   },
   onChange(event) {
     console.log(event.detail);
@@ -73,6 +80,20 @@ Page({
       this.setData({
         popUpData:tData,
         showPopup:true
+      })
+
+      // 设置预览图片数组
+      var tArr=new Array();
+      var tt = tData.problem.images;
+      for(let i=0;i<tt.length;i++){
+        tArr.push(baseurl + "file/img?picName=" +tt[i]);
+      }
+      tt=tData.reply.images
+      for (let i = 0; i < tt.length; i++) {
+        tArr.push(baseurl + "file/img?picName=" + tt[i]);
+      }
+      this.setData({
+        previewImg:tArr
       })
     }
   },
