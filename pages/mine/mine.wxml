@@ -95,8 +95,12 @@
     <van-popup show="{{ pwdShow }}" overlay="{{ true }}" bind:click-overlay="pwdClose">
 
       <view class='fw-flex fw-fdc modal'>
-        <text class='title fw-c-error'>修改密码</text>
-        <text class='content' bindtap="copy" data-key='{{PWDweb}}'>{{PWDweb}}</text>
+      <block wx:for="{{serviceItems}}">
+       <text class='title fw-c-error'>{{item.title}}</text>
+        <text class='content' bindtap="copy" data-key='{{item.link}}'>{{item.link}}           </text>
+      </block>
+       
+
         <van-tag class='fw-text-c' round='true' plain='true' type="primary" color='#ed3f14' size='medium'>点击网址即可复制到剪贴板
         </van-tag>
       </view>

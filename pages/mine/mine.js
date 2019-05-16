@@ -22,6 +22,17 @@ Page({
       "2604395430@qq.com",
       "dafafaf@qq.com"
     ],
+    serviceItems:[
+      {
+        title:"修改密码",
+        link:"https://www.baidu.com"
+      },
+      {
+        title: "登录地址",
+        link: "https://www.baidu.com"
+      },
+    ]
+    ,
     superitems: [
       {
         icon: 'mail',
@@ -30,7 +41,7 @@ Page({
       },
       {
         icon: 'collection',
-        name: '密码服务',
+        name: '相关链接',
         key: 'password'
       }
     ],

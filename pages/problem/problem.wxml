@@ -1,11 +1,12 @@
 <!--pages/problem/problem.wxml-->
 <!--手风琴折叠版-->
+<wxs module='filter' src='../filter/filter.wxs'></wxs>
 <view>
   <van-collapse value="{{ activeName }}" bind:change="onChange" accordion>
     <van-collapse-item wx:for="{{content}}" title="{{item.title}}" name="{{index}}">
       {{item.text}}
       <view class='fw-flex fw-fdc fw-margin-top-xs'>
-        <image class='problemImg' wx:for="{{content[index].imgs}}" src="{{item}}" mode='aspectFit' />
+        <image class='problemImg' wx:for="{{content[index].imgs}}" src="{{filter.imageUrl(item)}}" mode='aspectFit' bindtap='previewImg' data-src='{{filter.imageUrl(item)}}'/>
       </view>
     </van-collapse-item>
   </van-collapse>
