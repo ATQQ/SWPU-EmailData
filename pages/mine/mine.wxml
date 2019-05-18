@@ -109,9 +109,9 @@
   </view>
   <!-- 底部导航栏 -->
   <i-tab-bar current="{{ tabsBarcurrent }}" bindchange="tabsBarchange" fixed>
-    <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页" />
+    <!-- <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页" />
     <i-tab-bar-item key="group" icon="group" current-icon="group_fill" title="Friends" />
-    <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" title="Notice" />
+    <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" title="Notice" /> -->
     <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" title="我的" />
   </i-tab-bar>
 </view>

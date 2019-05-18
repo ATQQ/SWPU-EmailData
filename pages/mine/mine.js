@@ -24,12 +24,12 @@ Page({
     ],
     serviceItems:[
       {
-        title:"修改密码",
-        link:"https://www.baidu.com"
+        title:"邮箱默认密码",
+        link:"身份证后6位"
       },
       {
-        title: "登录地址",
-        link: "https://www.baidu.com"
+        title: "邮箱登录地址",
+        link: "http://mail.swpu.edu.cn/"
       },
     ]
     ,
