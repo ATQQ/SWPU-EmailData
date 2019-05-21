@@ -22,19 +22,16 @@ Page({
       "2604395430@qq.com",
       "dafafaf@qq.com"
     ],
-    serviceItems:[
-      {
-        title:"邮箱默认密码",
-        link:"身份证后6位"
+    serviceItems: [{
+        title: "邮箱默认密码",
+        link: "身份证后6位"
       },
       {
         title: "邮箱登录地址",
         link: "http://mail.swpu.edu.cn/"
       },
-    ]
-    ,
-    superitems: [
-      {
+    ],
+    superitems: [{
         icon: 'mail',
         name: '查看邮箱',
         key: 'mail'
@@ -45,19 +42,17 @@ Page({
         key: 'password'
       }
     ],
-    funitems: [
-      {
-        name: '功能'
-      }
-    ]
+    funitems: [{
+      name: '功能'
+    }]
   },
   // 复制邮箱
-  copy: function (res) {
+  copy: function(res) {
     wx.setClipboardData({
       data: res.currentTarget.dataset.key,
-      success: function (res) {
+      success: function(res) {
         wx.getClipboardData({
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '复制成功'
             })
@@ -67,7 +62,7 @@ Page({
     })
   },
   // 常用功能
-  superFun: function (res) {
+  superFun: function(res) {
     const key = res.currentTarget.dataset.key;
     console.log(key);
     switch (key) {
@@ -84,29 +79,29 @@ Page({
     }
   },
   // 关闭弹窗
-  emailClose: function () {
+  emailClose: function() {
     this.setData({
       emailShow: false
     })
   },
-  pwdClose: function () {
+  pwdClose: function() {
     this.setData({
       pwdShow: false
     })
   },
   // 页面跳转
-  funClick: function (res) {
+  funClick: function(res) {
     const key = res.currentTarget.dataset.key;
     console.log(key);
     switch (key) {
       case 'problem':
         wx.navigateTo({
           url: '../problem/problem',
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '加载中',
               icon: 'loading',
-              duration: 2500        //  2秒后自动关闭
+              duration: 2500 //  2秒后自动关闭
             })
           }
         })
@@ -114,11 +109,11 @@ Page({
       case 'feedback':
         wx.navigateTo({
           url: '../feedback/feedback',
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '加载中',
               icon: 'loading',
-              duration: 2500        //  2秒后自动关闭
+              duration: 2500 //  2秒后自动关闭
             })
           }
         })
@@ -126,11 +121,11 @@ Page({
       case 'myfeedback':
         wx.navigateTo({
           url: '../myfeedback/myfeedback',
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '加载中',
               icon: 'loading',
-              duration: 2500        //  2秒后自动关闭
+              duration: 2500 //  2秒后自动关闭
             })
           }
         })
@@ -139,30 +134,31 @@ Page({
         wx.showModal({
           title: '提示',
           content: '确定退出？',
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
               wx.showToast({
                 title: '请稍等...',
                 icon: 'loading',
-                mask:true,
-                duration: 2000        //  2秒后自动关闭
+                mask: true,
+                duration: 2000 //  2秒后自动关闭
               })
-              // 确定删除
+              // 确定退出
               wx.request({
                 url: baseurl + "user/logout",
                 method: "GET",
                 header: app.globalData.header,
-                success: function (res) {
+                success: function(res) {
                   res = res.data;
                   if (res.status == 1) {
+                    wx.removeStorageSync('token')
                     // 重定向到登录页面
                     wx.redirectTo({
                       url: '../index/index',
-                      success: function (res) {
+                      success: function(res) {
                         wx.showToast({
                           title: '退出成功',
                           icon: 'loading',
-                          duration: 1000        //  2秒后自动关闭
+                          duration: 1000 //  2秒后自动关闭
                         })
                       }
                     })
@@ -182,7 +178,7 @@ Page({
     }
   },
   //刷新数据
-  refreshData: function (name, email, username) {
+  refreshData: function(name, email, username) {
     this.setData({
       userInfo: {
         idNumber: username,
@@ -197,7 +193,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
     var token = wx.getStorageSync('token');
     if (token === null || token === '') {
@@ -214,18 +210,52 @@ Page({
       // 请求数据
       var that = this;
 
+      // 加载个人数据
       wx.request({
         url: baseurl + 'email/get',
         method: "GET",
         header: app.globalData.header,
-        success: function (res) {
+        success: function(res) {
           wx.setStorageSync('userData', JSON.stringify(res.data));
           console.log(res);
           res = res.data;
           //刷新数据
           that.refreshData(res.data.name, res.data.email, res.data.username);
         },
-        fail: function () {
+        fail: function() {
+          wx.showToast({
+            title: '网络错误',
+            icon: 'none',
+            mask: true
+          })
+        }
+      })
+
+      //加载相关链接数据
+      wx.request({
+        url: baseurl + 'settings/settings?type=1',
+        method: "GET",
+        header: app.globalData.header,
+        success: function(res) {
+          res = res.data;
+          // 临时存放相关链接数据
+          let tempData=new Array();
+          if (res.status) {
+            res = res.data;
+            for (let i = 0; i < res.length; i++) {
+              tempData.push({
+                title:res[i].sKey,
+                link:res[i].sValue
+              })
+            }
+          } else {
+            console.log("没有数据");
+          }
+          that.setData({
+            serviceItems:tempData
+          })
+        },
+        fail: function() {
           wx.showToast({
             title: '网络错误',
             icon: 'none',
@@ -239,49 +269,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

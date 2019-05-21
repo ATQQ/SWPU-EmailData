@@ -26,6 +26,7 @@
     "van-notice-bar": "source/plunge/vant/notice-bar/index",
     "i-notice-bar": "source/plunge/iview/notice-bar/index",
     "van-collapse": "source/plunge/vant/collapse/index",
-    "van-collapse-item": "source/plunge/vant/collapse-item/index"
+    "van-collapse-item": "source/plunge/vant/collapse-item/index",
+    "van-switch": "source/plunge/vant/switch/index"
   }
 }

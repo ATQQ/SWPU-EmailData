@@ -5,17 +5,25 @@ const baseurl = app.globalData.baseUrl;
 Page({
   data: {
     account: '',
-    password: ''
+    password: '',
+    remember:false,
+    rememberText: "记住密码?"
+  },
+  // 切换记住密码状态
+  rememberChange:function(e){
+    this.setData({
+      remember: e.detail
+    })
   },
   // 输入事件
   accountInput: function(e) {
     this.setData({
-      account: e.detail
+      account: e.detail.value
     })
   },
   passwordInput: function(e) {
     this.setData({
-      password: e.detail
+      password: e.detail.value
     })
   },
   // 登录
@@ -39,6 +47,7 @@ Page({
       })
       return;
     }
+    var that=this;
     //发送请求
     wx.request({
       url: baseurl + 'user/login',
@@ -83,8 +92,16 @@ Page({
                 mask: true,
                 icon: 'success'
               })
-              //判断是否为首次登陆
+              //判断是否勾选记住密码
+              if(that.data.remember){
+                console.log(that.data);
+                wx.setStorageSync('nowData', JSON.stringify(that.data))
+              }else{
+                wx.setStorageSync('nowData', "")
+                // wx.clearStorageSync();
+              }
 
+              //判断是否为首次登陆
               switch (res.data.status) {
                 case 0:
                   //跳转到修改密码
@@ -130,6 +147,25 @@ Page({
   },
 
   onLoad: function() {
-
+    // var datas=wx.getStorageSync('nowData');
+    // console.log(datas);
+    // if(datas!=""){
+    //   this.data=JSON.parse(datas);
+    // }
+  },
+  /**
+  * 生命周期函数--监听页面初次渲染完成
+  */
+  onReady: function () {
+    var datas = wx.getStorageSync('nowData');
+    console.log(datas);
+    if (datas != "") {
+      datas = JSON.parse(datas);
+      this.setData({
+        account:datas.account,
+        password:datas.password,
+        remember:datas.remember
+      })
+    }
   }
 })
