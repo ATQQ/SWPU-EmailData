@@ -61,7 +61,7 @@ Page({
         switch (res.status) {
           case -1:
             wx.showToast({
-              title: '账号不存在',
+              title: '账号尚未备案,请前往服务门户备案',
               mask: true,
               icon: 'none'
             })

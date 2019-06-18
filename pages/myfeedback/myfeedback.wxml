@@ -1,6 +1,9 @@
 <!--pages/myfeedback/myfeedback.wxml-->
 <wxs module='filter' src='../filter/filter.wxs'></wxs>
 <view>
+  <view wx:if="{{isEmpty}}" class='emptyTips'>
+    <text>亲,你还没有反馈过问题哟!</text>
+  </view>
   <scroll-view id='message-sv'>
     <view class='fw-flex fw-c-c fw-warp'>
       <block wx:for="{{messageData}}">

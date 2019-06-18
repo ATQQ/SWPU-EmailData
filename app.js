@@ -35,7 +35,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl:"http://localhost:8080/SWPU_Mail/",
+    baseUrl:"https://sugarat.top/SWPU_Mail/",
     header:{
       Cookie: '',
       token: ''

@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isEmpty:true,
     activeName:1,
     showPopup:false,
     messageData:[
@@ -154,13 +155,15 @@ Page({
 
           // 设置为获取到的数据
           that.setData({
-            messageData: tdatas
+            messageData: tdatas,
+            isEmpty: false
           })
 
           // console.log(tdatas);
         }else{
           that.setData({
-            messageData:[]
+            messageData:[],
+            isEmpty:true
           })
         }
       },

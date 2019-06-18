@@ -1,3 +1,10 @@
+.emptyTips{
+  text-align: center;
+  font-size: 16px;
+  color: gray;
+  margin-top: 30vh;
+}
+
 #message-sv {
   background-color: #e9eaec;
   margin-bottom: 51px;
